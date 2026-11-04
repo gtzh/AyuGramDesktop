@@ -8915,6 +8915,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 "ayu_HideShareButton" = "Hide Side \"Share\" Button";
 "ayu_HideVideoControlsWhilePlaying" = "Hide Player Controls While Playing";
 "ayu_HideVideoControlsWhilePlayingDescription" = "Controls and the title won't show up when you move the mouse over a playing video. Click the video or press a key to bring them back.";
+"ayu_BoostDownloadSpeed" = "Boost Download & Streaming Speed";
+"ayu_BoostDownloadSpeedDescription" = "Uses more parallel MTProto connections for file downloads and video streaming (up to 12 sessions, 4 MB in flight per session). Helps on fast connections; turn it off if you see FLOOD_WAIT errors.";
 "ayu_ChatFoldersHeader" = "Chat Folders";
 "ayu_SettingsContextMenuTitle" = "Choose when to show the item";
 "ayu_SettingsContextMenuDescription" = "Extended menu items will be displayed if you hold CTRL or SHIFT while right-clicking on the message.";

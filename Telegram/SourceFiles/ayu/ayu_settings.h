@@ -291,6 +291,7 @@ public:
 	[[nodiscard]] bool removeMessageTail() const { return _removeMessageTail.current(); }
 	[[nodiscard]] bool disableNotificationsDelay() const { return _disableNotificationsDelay.current(); }
 	[[nodiscard]] bool hideVideoControlsWhilePlaying() const { return _hideVideoControlsWhilePlaying.current(); }
+	[[nodiscard]] bool boostDownloadSpeed() const { return _boostDownloadSpeed.current(); }
 	[[nodiscard]] bool localPremium() const { return _localPremium.current(); }
 	[[nodiscard]] bool showChannelReactions() const { return _showChannelReactions.current(); }
 	[[nodiscard]] bool showGroupReactions() const { return _showGroupReactions.current(); }
@@ -379,6 +380,7 @@ public:
 	void setRemoveMessageTail(bool val);
 	void setDisableNotificationsDelay(bool val);
 	void setHideVideoControlsWhilePlaying(bool val);
+	void setBoostDownloadSpeed(bool val);
 	void setLocalPremium(bool val);
 	void setShowChannelReactions(bool val);
 	void setShowGroupReactions(bool val);
@@ -493,6 +495,8 @@ public:
 	[[nodiscard]] rpl::producer<bool> disableNotificationsDelayChanges() const { return _disableNotificationsDelay.changes(); }
 	[[nodiscard]] rpl::producer<bool> hideVideoControlsWhilePlayingValue() const { return _hideVideoControlsWhilePlaying.value(); }
 	[[nodiscard]] rpl::producer<bool> hideVideoControlsWhilePlayingChanges() const { return _hideVideoControlsWhilePlaying.changes(); }
+	[[nodiscard]] rpl::producer<bool> boostDownloadSpeedValue() const { return _boostDownloadSpeed.value(); }
+	[[nodiscard]] rpl::producer<bool> boostDownloadSpeedChanges() const { return _boostDownloadSpeed.changes(); }
 	[[nodiscard]] rpl::producer<bool> localPremiumValue() const { return _localPremium.value(); }
 	[[nodiscard]] rpl::producer<bool> localPremiumChanges() const { return _localPremium.changes(); }
 	[[nodiscard]] rpl::producer<bool> showChannelReactionsValue() const { return _showChannelReactions.value(); }
@@ -652,6 +656,7 @@ private:
 	rpl::variable<bool> _removeMessageTail = false;
 	rpl::variable<bool> _disableNotificationsDelay = false;
 	rpl::variable<bool> _hideVideoControlsWhilePlaying = false;
+	rpl::variable<bool> _boostDownloadSpeed = false;
 	rpl::variable<bool> _localPremium = false;
 	rpl::variable<bool> _showChannelReactions = true;
 	rpl::variable<bool> _showGroupReactions = true;

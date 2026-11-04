@@ -216,6 +216,16 @@ void BuildQoLToggles(SectionBuilder &builder, AyuSectionBuilder &ayu) {
 	builder.addDividerText(tr::ayu_HideVideoControlsWhilePlayingDescription());
 	builder.addSkip();
 
+	ayu.addSettingToggle({
+		.id = u"ayu/boostDownloadSpeed"_q,
+		.title = tr::ayu_BoostDownloadSpeed(),
+		.getter = &AyuSettings::boostDownloadSpeed,
+		.setter = &AyuSettings::setBoostDownloadSpeed,
+	});
+	builder.addSkip();
+	builder.addDividerText(tr::ayu_BoostDownloadSpeedDescription());
+	builder.addSkip();
+
 	ayu.addSectionDivider();
 
 	const auto zalgoButton = builder.addButton({
