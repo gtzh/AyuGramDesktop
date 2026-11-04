@@ -675,6 +675,12 @@ void AyuSettings::setDisableNotificationsDelay(bool val) {
 	save();
 }
 
+void AyuSettings::setHideVideoControlsWhilePlaying(bool val) {
+	if (_hideVideoControlsWhilePlaying.current() == val) return;
+	_hideVideoControlsWhilePlaying = val;
+	save();
+}
+
 void AyuSettings::setLocalPremium(bool val) {
 	if (_localPremium.current() == val) return;
 	_localPremium = val;
@@ -1102,6 +1108,7 @@ void to_json(nlohmann::json &j, const AyuSettings &s) {
 		{"materialSwitches", s._materialSwitches.current()},
 		{"removeMessageTail", s._removeMessageTail.current()},
 		{"disableNotificationsDelay", s._disableNotificationsDelay.current()},
+		{"hideVideoControlsWhilePlaying", s._hideVideoControlsWhilePlaying.current()},
 		{"localPremium", s._localPremium.current()},
 		{"showChannelReactions", s._showChannelReactions.current()},
 		{"showGroupReactions", s._showGroupReactions.current()},
@@ -1206,6 +1213,7 @@ void from_json(const nlohmann::json &j, AyuSettings &s) {
 	s._materialSwitches = j.value("materialSwitches", defaults._materialSwitches.current());
 	s._removeMessageTail = j.value("removeMessageTail", defaults._removeMessageTail.current());
 	s._disableNotificationsDelay = j.value("disableNotificationsDelay", defaults._disableNotificationsDelay.current());
+	s._hideVideoControlsWhilePlaying = j.value("hideVideoControlsWhilePlaying", defaults._hideVideoControlsWhilePlaying.current());
 	s._localPremium = j.value("localPremium", defaults._localPremium.current());
 	s._showChannelReactions = j.value("showChannelReactions", defaults._showChannelReactions.current());
 	s._showGroupReactions = j.value("showGroupReactions", defaults._showGroupReactions.current());

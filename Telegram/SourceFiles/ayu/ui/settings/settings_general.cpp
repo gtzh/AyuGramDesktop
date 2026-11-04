@@ -206,6 +206,16 @@ void BuildQoLToggles(SectionBuilder &builder, AyuSectionBuilder &ayu) {
 		.setter = &AyuSettings::setDisableNotificationsDelay,
 	});
 
+	ayu.addSettingToggle({
+		.id = u"ayu/hideVideoControlsWhilePlaying"_q,
+		.title = tr::ayu_HideVideoControlsWhilePlaying(),
+		.getter = &AyuSettings::hideVideoControlsWhilePlaying,
+		.setter = &AyuSettings::setHideVideoControlsWhilePlaying,
+	});
+	builder.addSkip();
+	builder.addDividerText(tr::ayu_HideVideoControlsWhilePlayingDescription());
+	builder.addSkip();
+
 	ayu.addSectionDivider();
 
 	const auto zalgoButton = builder.addButton({

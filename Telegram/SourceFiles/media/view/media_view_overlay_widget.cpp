@@ -3188,7 +3188,11 @@ void OverlayWidget::toggleFullScreen(bool fullscreen) {
 	_helper->clearState();
 }
 
-void OverlayWidget::activateControls() {
+void OverlayWidget::activateControls(bool fromMouseMove) {
+	// AyuGram: don't reveal controls on mouse move while a video is playing.
+	if (fromMouseMove && shouldHideVideoControls()) {
+		return;
+	}
 	if (!_menu && !_mousePressed && !_touchMove && !_stories) {
 		_controlsHideTimer.callOnce(st::mediaviewWaitHide);
 	}
@@ -3205,6 +3209,20 @@ void OverlayWidget::activateControls() {
 			_stateAnimation.start();
 		}
 	}
+}
+
+bool OverlayWidget::shouldHideVideoControls() const {
+	if (!AyuSettings::getInstance().hideVideoControlsWhilePlaying()
+		|| !_streamed
+		|| !_document
+		|| _stories) {
+		return false;
+	}
+	const auto &player = _streamed->instance.player();
+	return player.active()
+		&& !player.paused()
+		&& !player.finished()
+		&& !player.failed();
 }
 
 void OverlayWidget::hideControls(bool force) {
@@ -8775,7 +8793,7 @@ bool OverlayWidget::filterApplicationEvent(
 				activate = true;
 			}
 			if (activate) {
-				activateControls();
+				activateControls(type == QEvent::MouseMove);
 			}
 		}
 	}

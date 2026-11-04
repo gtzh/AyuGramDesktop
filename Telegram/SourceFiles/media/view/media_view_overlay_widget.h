@@ -123,7 +123,7 @@ public:
 
 	void show(OpenRequest request);
 
-	void activateControls();
+	void activateControls(bool fromMouseMove = false);
 	void close();
 	void minimize();
 	void toggleFullScreen();
@@ -299,6 +299,7 @@ private:
 	int storiesTopNotchSkip() override;
 
 	void hideControls(bool force = false);
+	[[nodiscard]] bool shouldHideVideoControls() const;
 	void subscribeToScreenGeometry();
 
 	void toMessage();

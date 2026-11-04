@@ -8913,6 +8913,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 "ayu_MaterialSwitches" = "MD3 Switch Style";
 "ayu_RemoveMessageTail" = "Remove Message Tail";
 "ayu_HideShareButton" = "Hide Side \"Share\" Button";
+"ayu_HideVideoControlsWhilePlaying" = "Hide Player Controls While Playing";
+"ayu_HideVideoControlsWhilePlayingDescription" = "Controls and the title won't show up when you move the mouse over a playing video. Click the video or press a key to bring them back.";
 "ayu_ChatFoldersHeader" = "Chat Folders";
 "ayu_SettingsContextMenuTitle" = "Choose when to show the item";
 "ayu_SettingsContextMenuDescription" = "Extended menu items will be displayed if you hold CTRL or SHIFT while right-clicking on the message.";
