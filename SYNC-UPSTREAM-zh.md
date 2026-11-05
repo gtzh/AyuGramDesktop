@@ -128,3 +128,40 @@ C:\tbuild\run_build.bat
 - ❌ 强推用 `git push -f` —— 用 `--force-with-lease`，避免覆盖别人（或你在别处）的提交。
 - ❌ 在 `dev` 分支上做这两个功能 —— 已经在独立分支了，保持这样。
 - ❌ 浅克隆不 unshallow 就 rebase —— 会失败。
+
+## 7. 让 AI 助手代跑（跨会话）
+
+下次上游更新，新开一个会话说一句「**同步上游并重新编译**」即可。
+助手没有跨会话记忆，但仓库里已经固化了全部流程，让它先读：
+
+- `tools/sync-upstream.ps1` — 同步（dry-run / -Apply / -Push）
+- `tools/update-and-build.ps1` — 同步 + 重编 + 冒烟 + 拷到 dist 的一键脚本
+- 本文件第 3 节 — 冲突速查表
+- `BUILD-NOTES-zh.md` — 编译环境、依赖、踩坑记录
+
+推荐让助手执行：
+
+```powershell
+powershell -File tools\update-and-build.ps1
+```
+
+前置条件（缺了就告诉助手）：
+
+1. **本机编译环境还在**：`C:\tbuild\tdesktop`、`C:\tbuild\Libraries\win64`、
+   VS Build Tools 17.14 等。环境被清理就得按 `BUILD-NOTES-zh.md` 重建依赖（几小时）。
+2. **无冲突或人工裁决**：脚本遇到 rebase 冲突会以 code 2 退出，需要人决定保留哪边。
+3. **上传 Release 需要临时 PAT**（Contents: read+write，只给 `gtzh/AyuGramDesktop`）。
+   助手不会保存 token；用完请 revoke。推代码用 SSH key 即可，不需要 token。
+4. **编译期间不要动 MSBuild / 不要开 AyuGram.exe**（后者会导致 LNK1104）。
+
+助手做不到的事：
+
+- 不会自己感知上游更新，也不会后台定时跑 —— 必须你开会话触发。
+- 不能替你判断产品层面的取舍（比如上游重写了播放器、这两个功能还要不要、
+  开关默认值要不要改）。
+- Release 附件上传需要你当场给 token。
+
+想要「完全不用找人」的话，可以加一个 GitHub Actions 定时任务，每天
+`fetch upstream` + 自动 rebase（只在无冲突时 push）；但 **编译 exe 仍需本机**，
+GitHub 托管 runner 编不动 tdesktop（依赖几百 MB、耗时数小时）。要这个工作流
+就让助手写 `.github/workflows/sync-upstream.yml`。
